@@ -1,0 +1,144 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyNxlLXXK9Yqqqfbw6lmUnO/",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/muvunyiy77-a11y/Day-One/blob/main/Artificial%20intelligence%20codes\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "# **Artificial INTELIGENCE**"
+      ],
+      "metadata": {
+        "id": "gW4qHzmDCakj"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "# **20.12.1 Preparation and executable code**\n",
+        "\n",
+        "Create a fresh notebook, run the environment setup if needed, then execute the following listing from top to\n",
+        "bottom. Keep the seed and split unchanged during the first run so that comparisons are meaningful."
+      ],
+      "metadata": {
+        "id": "ZP7mI1E1CSb6"
+      }
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 2,
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "K9anH_VOCOtc",
+        "outputId": "24ce9534-940a-4411-c90f-973cbe288b78"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Logistic {'recall': np.float64(0.6831173639392818), 'precision': np.float64(0.6772644741790792), 'average_precision': np.float64(0.7290711244004386)}\n",
+            "Forest {'recall': np.float64(0.7021473528322842), 'precision': np.float64(0.6633098921706517), 'average_precision': np.float64(0.7053969835640105)}\n",
+            "[[44 44]\n",
+            " [12 80]]\n",
+            "              precision    recall  f1-score   support\n",
+            "\n",
+            "           0       0.79      0.50      0.61        88\n",
+            "           1       0.65      0.87      0.74        92\n",
+            "\n",
+            "    accuracy                           0.69       180\n",
+            "   macro avg       0.72      0.68      0.68       180\n",
+            "weighted avg       0.71      0.69      0.68       180\n",
+            "\n",
+            "Test average precision: 0.7101351000877446\n"
+          ]
+        }
+      ],
+      "source": [
+        "import numpy as np\n",
+        "import pandas as pd\n",
+        "from sklearn.compose import ColumnTransformer\n",
+        "from sklearn.ensemble import RandomForestClassifier\n",
+        "from sklearn.impute import SimpleImputer\n",
+        "from sklearn.linear_model import LogisticRegression\n",
+        "from sklearn.metrics import classification_report, confusion_matrix, average_precision_score\n",
+        "from sklearn.model_selection import StratifiedKFold, cross_validate, train_test_split\n",
+        "from sklearn.pipeline import Pipeline\n",
+        "from sklearn.preprocessing import OneHotEncoder, StandardScaler\n",
+        "rng = np.random.default_rng(42)\n",
+        "n = 900\n",
+        "df = pd.DataFrame({\n",
+        "     \"route_zone\": rng.choice([\"central\", \"north\", \"east\", \"south\"], n),\n",
+        "     \"bus_age_years\": rng.uniform(1, 15, n),\n",
+        "     \"distance_7d_km\": rng.normal(1050, 240, n).clip(250, 1900),\n",
+        "     \"vibration_rms\": rng.lognormal(0.15, 0.40, n),\n",
+        "     \"coolant_temp_c\": rng.normal(87, 7, n),\n",
+        "     \"prior_alerts_30d\": rng.poisson(1.2, n),\n",
+        "        })\n",
+        "logit = (-7.2 + 0.18*df.bus_age_years + 0.0015*df.distance_7d_km\n",
+        "+ 0.65*df.vibration_rms + 0.035*df.coolant_temp_c\n",
+        "+ 0.38*df.prior_alerts_30d)\n",
+        "df[\"service_needed_7d\"] = rng.binomial(1, 1/(1+np.exp(-logit)))\n",
+        "for col in [\"vibration_rms\", \"coolant_temp_c\"]:\n",
+        "    df.loc[rng.choice(n, 18, replace=False), col] = np.nan\n",
+        "X = df.drop(columns=\"service_needed_7d\")\n",
+        "y = df.service_needed_7d\n",
+        "X_develop, X_test, y_develop, y_test = train_test_split(\n",
+        "X, y, test_size=0.20, stratify=y, random_state=42)\n",
+        "numeric = [\"bus_age_years\", \"distance_7d_km\", \"vibration_rms\", \"coolant_temp_c\", \"prior_alerts_30d\"]\n",
+        "categorical = [\"route_zone\"]\n",
+        "preprocess = ColumnTransformer([\n",
+        "(\"num\", Pipeline([(\"impute\", SimpleImputer(strategy=\"median\")),\n",
+        "(\"scale\", StandardScaler())]), numeric),\n",
+        "(\"cat\", OneHotEncoder(handle_unknown=\"ignore\"), categorical),\n",
+        "])\n",
+        "models = {\n",
+        "\"Logistic\": LogisticRegression(max_iter=1500, class_weight=\"balanced\", random_state=42),\n",
+        "\"Forest\": RandomForestClassifier(n_estimators=300, min_samples_leaf=4,\n",
+        "class_weight=\"balanced\", random_state=42),\n",
+        "}\n",
+        "cv = StratifiedKFold(n_splits=5, shuffle=True, random_state=42)\n",
+        "for name, estimator in models.items():\n",
+        "    pipe = Pipeline([(\"preprocess\", preprocess), (\"model\", estimator)])\n",
+        "    scores = cross_validate(pipe, X_develop, y_develop, cv=cv,\n",
+        "    scoring=[\"recall\", \"precision\", \"average_precision\"])\n",
+        "    print(name, {m: scores[f\"test_{m}\"].mean()\n",
+        "    for m in [\"recall\", \"precision\", \"average_precision\"]})\n",
+        "# Choose only after comparing development-fold evidence and operational costs.\n",
+        "final_model = Pipeline([(\"preprocess\", preprocess), (\"model\", models[\"Forest\"])])\n",
+        "final_model.fit(X_develop, y_develop)\n",
+        "test_probability = final_model.predict_proba(X_test)[:, 1]\n",
+        "threshold = 0.35 # must be justified on development data in a full project\n",
+        "test_prediction = (test_probability >= threshold).astype(int)\n",
+        "print(confusion_matrix(y_test, test_prediction, labels=[0, 1]))\n",
+        "print(classification_report(y_test, test_prediction, zero_division=0))\n",
+        "print(\"Test average precision:\", average_precision_score(y_test, test_probability))"
+      ]
+    }
+  ]
+}
