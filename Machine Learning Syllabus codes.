@@ -4,7 +4,7 @@
   "metadata": {
     "colab": {
       "provenance": [],
-      "authorship_tag": "ABX9TyOS9xzwz5lhC01rJgHGm0cx",
+      "authorship_tag": "ABX9TyMV6CxmFPjVdr4G/xQfAzVw",
       "include_colab_link": true
     },
     "kernelspec": {
@@ -27,14 +27,42 @@
       ]
     },
     {
+      "cell_type": "markdown",
+      "source": [
+        "# Group 4 members\n",
+        "\n",
+        "1. **YANNICK MUVUNYI**: BBICTE242500001\n",
+        "\n",
+        "2. **YVES IRADUKUNDA**: BBICTR/2025/68609\n",
+        "\n",
+        "3. **Bagumaho Amduni Fred**: BBICTR/2025/33908\n",
+        "\n",
+        "4. **REAGAN RUMASHANA**: BBICTR/2025/30172\n",
+        "\n",
+        "5. **SHEMA CHRISTOPHE**: BBICT/2025/30238"
+      ],
+      "metadata": {
+        "id": "ArjhgElEebXt"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "# **Software Setup**"
+      ],
+      "metadata": {
+        "id": "-9RdJST9ea8q"
+      }
+    },
+    {
       "cell_type": "code",
-      "execution_count": 1,
+      "execution_count": 26,
       "metadata": {
         "colab": {
           "base_uri": "https://localhost:8080/"
         },
         "id": "l7cOVEp37kh8",
-        "outputId": "002fab38-38f2-4160-8f83-bd6ef96a6b09"
+        "outputId": "fc64a58b-be43-446d-ceba-7c349ae9e9af"
       },
       "outputs": [
         {
@@ -57,6 +85,21 @@
         "\n",
         "print(\"Environment ready\")"
       ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "# 2. Leakage-safe mixed-data pipeline\n",
+        "\n",
+        "**Objective**: Inspect a small service dataset, define features and target, and fit all transformations only on training folds.\n",
+        "\n",
+        "**Dataset and schema**: 120 records with wait_minutes (numeric), visits_90d (numeric), district (categorical), channel (categorical), and resolved_on_time (binary target).\n",
+        "\n",
+        "**Prerequisite recall**: pandas DataFrames, categorical variables, train/test splitting, and basic classification."
+      ],
+      "metadata": {
+        "id": "i38kgpTUeGvD"
+      }
     },
     {
       "cell_type": "code",
@@ -116,9 +159,9 @@
           "base_uri": "https://localhost:8080/"
         },
         "id": "X0tO6hZy76ek",
-        "outputId": "c85b86ce-1a46-4172-d5f3-e0387799d720"
+        "outputId": "8a67364c-c177-45ee-ed96-65bdc54b2952"
       },
-      "execution_count": 2,
+      "execution_count": 27,
       "outputs": [
         {
           "output_type": "stream",
@@ -153,6 +196,21 @@
           ]
         }
       ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "# 3. Baseline and multiple linear regression\n",
+        "\n",
+        "**Objective**: Predict daily water demand, compare against a mean baseline, inspect residuals, and interpret units.\n",
+        "\n",
+        "**Dataset and schema**: Generated numeric features temperature_c, deliveries, and promotion; target demand_crates.\n",
+        "\n",
+        "**Prerequisite recall**: Train/test split, residual convention y - y-hat, and MAE/RMSE/R-squared."
+      ],
+      "metadata": {
+        "id": "lBkHRCF9d3xw"
+      }
     },
     {
       "cell_type": "code",
@@ -203,9 +261,9 @@
           "height": 402
         },
         "id": "spru_kzM8Uu9",
-        "outputId": "c4597679-f340-45b8-9a3a-a6e817b6ca8a"
+        "outputId": "332245e1-06d4-439a-de6d-29c09ca57cf3"
       },
-      "execution_count": 5,
+      "execution_count": 28,
       "outputs": [
         {
           "output_type": "stream",
@@ -226,6 +284,21 @@
           "metadata": {}
         }
       ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "# 4. OLS, ridge, lasso, and partial least squares\n",
+        "\n",
+        "**Objective**: Compare linear estimators under correlated features using cross-validation and pipeline-based scaling.\n",
+        "\n",
+        "**Dataset and schema**: A generated regression dataset with ten correlated or noisy numeric predictors.\n",
+        "\n",
+        "**Prerequisite recall**: Linear regression, standardization, regularization strength, and cross-validation"
+      ],
+      "metadata": {
+        "id": "ugoOTL0GdlPG"
+      }
     },
     {
       "cell_type": "code",
@@ -261,9 +334,9 @@
           "base_uri": "https://localhost:8080/"
         },
         "id": "WsE07Ufp8z44",
-        "outputId": "3ad682be-a1c8-48a8-f6ba-1f7b50762a2f"
+        "outputId": "21c1da6a-728e-4ae2-f184-49e135ac57f3"
       },
-      "execution_count": 7,
+      "execution_count": 29,
       "outputs": [
         {
           "output_type": "stream",
@@ -274,6 +347,21 @@
           ]
         }
       ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "# 5. Logistic probabilities, thresholds, and unequal costs\n",
+        "\n",
+        "**Objectiv**e: Estimate event probabilities, compare thresholds, construct confusion matrices, and connect errors to action.\n",
+        "\n",
+        "**Dataset and schema**: Generated account-activity features and binary churn label.\n",
+        "\n",
+        "**Prerequisite recall**: Sigmoid, positive class, confusion matrix, precision, recall, and pipeline preprocessing."
+      ],
+      "metadata": {
+        "id": "NPzGODKAdSB-"
+      }
     },
     {
       "cell_type": "code",
@@ -311,9 +399,9 @@
           "base_uri": "https://localhost:8080/"
         },
         "id": "JmyL9YjY9PiI",
-        "outputId": "58c44685-0802-45d2-bea2-681a8d1444c8"
+        "outputId": "153bfd0c-51f9-4441-dea3-afdca0e5da17"
       },
-      "execution_count": 9,
+      "execution_count": 30,
       "outputs": [
         {
           "output_type": "stream",
@@ -323,6 +411,21 @@
           ]
         }
       ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "# 6. Scaled KNN and pruned decision tree\n",
+        "\n",
+        "**Objective**: Compare distance-based and rule-based classification with hyperparameters selected by crossvalidation.\n",
+        "\n",
+        "**Dataset and schema**: Built-in breast-cancer tabular dataset; target is a diagnostic class used only for learning method comparison.\n",
+        "\n",
+        "**Prerequisite recall**: Feature scaling, KNN, decision-tree depth, stratification, and balanced accuracy."
+      ],
+      "metadata": {
+        "id": "wOiIfCjec8Hu"
+      }
     },
     {
       "cell_type": "code",
@@ -361,9 +464,9 @@
           "base_uri": "https://localhost:8080/"
         },
         "id": "gqI0z7K79loL",
-        "outputId": "4bf85497-4f43-40ac-cfe2-7b2687eeace6"
+        "outputId": "a6cdbff1-14d0-4d5e-b69c-06f89cd13d0a"
       },
-      "execution_count": 11,
+      "execution_count": 31,
       "outputs": [
         {
           "output_type": "stream",
@@ -373,6 +476,21 @@
           ]
         }
       ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "# 7. Cost-aware model comparison and model card\n",
+        "\n",
+        "**Objective**: Compare five classifiers by repeated evidence and select for a costly false-negative context.\n",
+        "\n",
+        "**Dataset and schema**: Generated imbalanced binary risk dataset with eight numeric features.\n",
+        "\n",
+        "**Prerequisite recall**: Cross-validation, recall, ROC AUC, PR AUC, class weights, and independent testing."
+      ],
+      "metadata": {
+        "id": "Km6n6ddacluB"
+      }
     },
     {
       "cell_type": "code",
@@ -411,9 +529,9 @@
           "base_uri": "https://localhost:8080/"
         },
         "id": "OoFQwCkR91df",
-        "outputId": "d65906de-ec2e-4cd4-ddac-4215acac5f57"
+        "outputId": "3562e683-2d19-437d-b90b-4b637a898105"
       },
-      "execution_count": 13,
+      "execution_count": 32,
       "outputs": [
         {
           "output_type": "stream",
@@ -424,6 +542,21 @@
           ]
         }
       ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "# 8. Linear and RBF SVM versus a decision tree\n",
+        "\n",
+        "**Objective**: Visualize how scaling, C, and gamma influence margin-based nonlinear classification.\n",
+        "\n",
+        "**Dataset and schema**: Two-dimensional generated moon-shaped classes for interpretable decision-boundary visualization.\n",
+        "\n",
+        "**Prerequisite recall**: SVM margin, kernels, scaling, decision trees, and validation."
+      ],
+      "metadata": {
+        "id": "Z4OJqjHxcS1P"
+      }
     },
     {
       "cell_type": "code",
@@ -461,9 +594,9 @@
           "height": 347
         },
         "id": "12ledhZS-HeY",
-        "outputId": "6d72cc4e-fce2-4b85-9cbe-648080be4dd4"
+        "outputId": "932064bd-be29-4753-f08e-f4d302df9c05"
       },
-      "execution_count": 15,
+      "execution_count": 33,
       "outputs": [
         {
           "output_type": "display_data",
@@ -476,6 +609,21 @@
           "metadata": {}
         }
       ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "# 9. Naive Bayes for short service messages\n",
+        "\n",
+        "**Objective**: Classify short text messages with count features and inspect probabilistic predictions.\n",
+        "\n",
+        "**Dataset and schema**: Explicitly defined messages labeled urgent (1) or routine (0).\n",
+        "\n",
+        "**Prerequisite recall**: Conditional probability, bag-of-words representation, and train/test splitting."
+      ],
+      "metadata": {
+        "id": "wRlVRx5qcCOJ"
+      }
     },
     {
       "cell_type": "code",
@@ -511,9 +659,9 @@
           "base_uri": "https://localhost:8080/"
         },
         "id": "HUpdGeRk-TCB",
-        "outputId": "8a8262e0-fc25-41ef-9e09-af3ed16bf02a"
+        "outputId": "703f9d65-bc08-486b-e763-fe4f03bdfee6"
       },
-      "execution_count": 16,
+      "execution_count": 34,
       "outputs": [
         {
           "output_type": "stream",
@@ -538,6 +686,21 @@
           ]
         }
       ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "# 10. Single tree, random forest, and gradient boosting\n",
+        "\n",
+        "**Objective**: Compare ensemble stability and predictive evidence using identical splits and multiple metrics.\n",
+        "\n",
+        "**Dataset and schema**: Generated nonlinear binary dataset with ten features and moderate class imbalance.\n",
+        "\n",
+        "**Prerequisite recall**: Decision-tree overfitting, bootstrap aggregation, random feature selection, and boosting."
+      ],
+      "metadata": {
+        "id": "4oaWi5Asbwe6"
+      }
     },
     {
       "cell_type": "code",
@@ -574,9 +737,9 @@
           "base_uri": "https://localhost:8080/"
         },
         "id": "Y7SFrEdp-gsJ",
-        "outputId": "c7bc5569-f668-458e-811a-1ea034ef8d17"
+        "outputId": "540106fb-4b83-4783-ebff-997dec7c6b70"
       },
-      "execution_count": 18,
+      "execution_count": 35,
       "outputs": [
         {
           "output_type": "stream",
@@ -587,6 +750,21 @@
           ]
         }
       ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "# 11. Customer segmentation with k-means and Gaussian mixtures\n",
+        "\n",
+        "**Objective**: Compare hard and probabilistic membership after appropriate feature scaling.\n",
+        "\n",
+        "**Dataset and schema**: Generated annual_spend, visits_month, and digital_share; no target label.\n",
+        "\n",
+        "**Prerequisite recall**: Unsupervised learning, standardization, silhouette score, and BIC."
+      ],
+      "metadata": {
+        "id": "D_CjYYSua_iB"
+      }
     },
     {
       "cell_type": "code",
@@ -624,9 +802,9 @@
           "height": 576
         },
         "id": "BbIMtzcZ-sha",
-        "outputId": "f8a5b48b-3359-439c-e6cb-075b0f4427c2"
+        "outputId": "0c601e8d-bb23-4376-ac29-4e04c53ef961"
       },
-      "execution_count": 19,
+      "execution_count": 36,
       "outputs": [
         {
           "output_type": "stream",
@@ -658,6 +836,21 @@
           ]
         }
       ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "# 12. Scaled sensor PCA and two-dimensional visualization\n",
+        "\n",
+        "**Objective**: Reduce correlated sensor features, choose component count from cumulative variance, and interpret loadings cautiously.\n",
+        "\n",
+        "**Dataset and schema**: Generated six-feature bus-sensor dataset with correlated temperature, vibration, and load signals.\n",
+        "\n",
+        "**Prerequisite recall**: Centering, scaling, explained variance, loadings, and train/test discipline."
+      ],
+      "metadata": {
+        "id": "savknfp7ZOds"
+      }
     },
     {
       "cell_type": "code",
@@ -699,9 +892,9 @@
           "height": 484
         },
         "id": "vtRiQI4i_BVP",
-        "outputId": "607fadc0-9bb3-41aa-91a6-5d7a5975cb47"
+        "outputId": "4b100f78-1cf1-42ea-b0cf-445225b23e0e"
       },
-      "execution_count": 20,
+      "execution_count": 37,
       "outputs": [
         {
           "output_type": "stream",
@@ -727,6 +920,21 @@
           "metadata": {}
         }
       ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "# 13. Standardized tabular multilayer perceptron\n",
+        "\n",
+        "**Objective**: Train a small MLP, inspect learning behavior, and compare it with a simple baseline.\n",
+        "\n",
+        "**Dataset and schema**: Built-in breast-cancer numeric dataset for method demonstration.\n",
+        "\n",
+        "**Prerequisite recall**: Neurons, hidden layers, activations, standardization, epochs, and validation."
+      ],
+      "metadata": {
+        "id": "PKDpE_hdY8IE"
+      }
     },
     {
       "cell_type": "code",
@@ -765,9 +973,9 @@
           "height": 467
         },
         "id": "g3uo3vku_KMU",
-        "outputId": "b18c1a91-b4dd-4563-f2f3-e736ec1e271e"
+        "outputId": "c03bb7f1-2e7f-4977-a482-baa0a76f172d"
       },
-      "execution_count": 22,
+      "execution_count": 38,
       "outputs": [
         {
           "output_type": "stream",
@@ -787,6 +995,27 @@
           "metadata": {}
         }
       ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "# 14.Baseline and dropout neural networks\n",
+        "\n",
+        "**Environment note**: This laboratory requires TensorFlow/Keras. The code is complete, but actual values must be recorded from a compatible environment; no training result is asserted in advance.\n",
+        "\n",
+        "**Learning Outcomes**\n",
+        "* Trace forward-loss-backward-update steps.\n",
+        "* Interpret a gradient and calculate a simple weight update.\n",
+        "* Diagnose learning curves and recommend regularization.\n",
+        "* Compare baseline and dropout networks without test-set tuning.\n",
+        "\n",
+        "**Prerequisite Recall**\n",
+        "Recall the forward pass z=Wx+b, loss functions, derivatives as local slopes, train/validation/test roles, and\n",
+        "overfitting."
+      ],
+      "metadata": {
+        "id": "ow4tWo3IYxXT"
+      }
     },
     {
       "cell_type": "code",
@@ -830,9 +1059,9 @@
           "base_uri": "https://localhost:8080/"
         },
         "id": "K-yuAmK3_Z36",
-        "outputId": "1191f3a1-6e56-4d6c-896d-33c4546bf1e0"
+        "outputId": "78b14577-4986-4f41-ffce-e8efb9492aa4"
       },
-      "execution_count": 24,
+      "execution_count": 39,
       "outputs": [
         {
           "output_type": "stream",
@@ -842,6 +1071,25 @@
           ]
         }
       ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "# 15. Compact CNN and transfer-learning pathway\n",
+        "\n",
+        "**Environment note**: This laboratory requires TensorFlow/Keras. The code is complete, but actual values must be\n",
+        "recorded from a compatible environment; no training result is asserted in advance\n",
+        "\n",
+        "**Objective**: Compare learning curves for two Keras models while holding data and architecture choices constant.\n",
+        "\n",
+        "**Dataset and schema**: Generated 20-feature binary dataset; TensorFlow/Keras is an optional environment requirement.\n",
+        "\n",
+        "**Prerequisite recall**: Forward pass, binary cross-entropy, backpropagation, mini-batches, dropout, and early\n",
+        "stopping."
+      ],
+      "metadata": {
+        "id": "L0WuNJjxYczL"
+      }
     },
     {
       "cell_type": "code",
@@ -879,38 +1127,30 @@
           "base_uri": "https://localhost:8080/"
         },
         "id": "45Iq5XjH_20F",
-        "outputId": "9f1a8885-d8ac-4a73-82ec-c430e5c9e4ef"
+        "outputId": "739233e3-a563-46c6-cd3d-be05fd9588b9"
       },
-      "execution_count": 25,
+      "execution_count": 40,
       "outputs": [
         {
           "output_type": "stream",
           "name": "stdout",
           "text": [
-            "Downloading data from https://storage.googleapis.com/tensorflow/tf-keras-datasets/train-labels-idx1-ubyte.gz\n",
-            "\u001b[1m29515/29515\u001b[0m \u001b[32m━━━━━━━━━━━━━━━━━━━━\u001b[0m\u001b[37m\u001b[0m \u001b[1m0s\u001b[0m 0us/step\n",
-            "Downloading data from https://storage.googleapis.com/tensorflow/tf-keras-datasets/train-images-idx3-ubyte.gz\n",
-            "\u001b[1m26421880/26421880\u001b[0m \u001b[32m━━━━━━━━━━━━━━━━━━━━\u001b[0m\u001b[37m\u001b[0m \u001b[1m2s\u001b[0m 0us/step\n",
-            "Downloading data from https://storage.googleapis.com/tensorflow/tf-keras-datasets/t10k-labels-idx1-ubyte.gz\n",
-            "\u001b[1m5148/5148\u001b[0m \u001b[32m━━━━━━━━━━━━━━━━━━━━\u001b[0m\u001b[37m\u001b[0m \u001b[1m0s\u001b[0m 0us/step\n",
-            "Downloading data from https://storage.googleapis.com/tensorflow/tf-keras-datasets/t10k-images-idx3-ubyte.gz\n",
-            "\u001b[1m4422102/4422102\u001b[0m \u001b[32m━━━━━━━━━━━━━━━━━━━━\u001b[0m\u001b[37m\u001b[0m \u001b[1m1s\u001b[0m 0us/step\n",
             "Epoch 1/8\n",
             "797/797 - 18s - 23ms/step - accuracy: 0.3719 - loss: 1.6677 - val_accuracy: 0.5684 - val_loss: 1.2291\n",
             "Epoch 2/8\n",
-            "797/797 - 16s - 21ms/step - accuracy: 0.5423 - loss: 1.2116 - val_accuracy: 0.6701 - val_loss: 1.0314\n",
+            "797/797 - 16s - 20ms/step - accuracy: 0.5423 - loss: 1.2116 - val_accuracy: 0.6701 - val_loss: 1.0314\n",
             "Epoch 3/8\n",
-            "797/797 - 20s - 26ms/step - accuracy: 0.5978 - loss: 1.0856 - val_accuracy: 0.6953 - val_loss: 0.9461\n",
+            "797/797 - 17s - 21ms/step - accuracy: 0.5978 - loss: 1.0856 - val_accuracy: 0.6953 - val_loss: 0.9461\n",
             "Epoch 4/8\n",
-            "797/797 - 17s - 21ms/step - accuracy: 0.6272 - loss: 1.0136 - val_accuracy: 0.7189 - val_loss: 0.8859\n",
+            "797/797 - 31s - 38ms/step - accuracy: 0.6272 - loss: 1.0136 - val_accuracy: 0.7189 - val_loss: 0.8859\n",
             "Epoch 5/8\n",
-            "797/797 - 21s - 26ms/step - accuracy: 0.6493 - loss: 0.9654 - val_accuracy: 0.7300 - val_loss: 0.8413\n",
+            "797/797 - 31s - 39ms/step - accuracy: 0.6493 - loss: 0.9654 - val_accuracy: 0.7300 - val_loss: 0.8413\n",
             "Epoch 6/8\n",
             "797/797 - 16s - 20ms/step - accuracy: 0.6654 - loss: 0.9235 - val_accuracy: 0.7338 - val_loss: 0.8046\n",
             "Epoch 7/8\n",
-            "797/797 - 16s - 20ms/step - accuracy: 0.6793 - loss: 0.8873 - val_accuracy: 0.7479 - val_loss: 0.7748\n",
+            "797/797 - 17s - 21ms/step - accuracy: 0.6793 - loss: 0.8873 - val_accuracy: 0.7479 - val_loss: 0.7748\n",
             "Epoch 8/8\n",
-            "797/797 - 16s - 20ms/step - accuracy: 0.6893 - loss: 0.8617 - val_accuracy: 0.7559 - val_loss: 0.7427\n",
+            "797/797 - 21s - 26ms/step - accuracy: 0.6893 - loss: 0.8617 - val_accuracy: 0.7559 - val_loss: 0.7427\n",
             "{'test_loss': 0.7511662840843201, 'test_accuracy': 0.7537999749183655}\n",
             "First ten predicted classes: [7 2 1 1 6 1 2 6 5 7]\n"
           ]
